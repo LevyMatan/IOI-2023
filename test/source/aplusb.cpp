@@ -138,13 +138,13 @@ TEST_CASE("A Plus B: toy example correctness") {
   }
 
   // Test that two vectors are equal
-  std::vector<int> res_effi = smallest_sums_efficient(N, A, B);
+  std::vector<int> res_effi = smallest_sums_efficient(n, A, B);
   for (int i = 0; i < n; ++i) {
     CHECK(expected[i] == res_effi[i]);
   }
 
   // Test that two vectors are equal
-  std::vector<int> res_chathelp = smallest_sums_chathelp(N, A, B);
+  std::vector<int> res_chathelp = smallest_sums_chathelp(n, A, B);
   for (int i = 0; i < n; ++i) {
     CHECK(expected[i] == res_chathelp[i]);
   }
