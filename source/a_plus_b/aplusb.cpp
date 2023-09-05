@@ -102,7 +102,7 @@ std::vector<long long> smallest_sums_efficient(int N, std::vector<int> A, std::v
     }
     auto min_it = std::min_element(temp_vector.begin(), temp_vector.end());
     int min_val = *min_it;
-    int min_idx = std::distance(temp_vector.begin(), min_it);
+    int min_idx = (int)std::distance(temp_vector.begin(), min_it);
     C[k] = min_val;
     k++;
     CC_index[min_idx]++;
