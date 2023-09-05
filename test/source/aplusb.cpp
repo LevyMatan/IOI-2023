@@ -190,8 +190,7 @@ TEST_CASE("A Plus B: long test case - Correctness against naive algorithm") {
   std::cout << "smallest_sums_chathelp took " << diff.count() << " seconds" << std::endl;
 
   // Check that the two results are the same
-  int n = res.size();
-  for (int i = 0; i < n; ++i) {
+  for (int i = 0; i < N; ++i) {
     CHECK(expected[i] == res_chathelp[i]);
   }
 }
