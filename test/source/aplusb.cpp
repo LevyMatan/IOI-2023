@@ -13,7 +13,7 @@
  * @brief A function pointer type for the A Plus B function
  *
  */
-using APlusBFunction = std::vector<long long> (*)(int, std::vector<int>, std::vector<int>);
+using APlusBFunction = std::vector<int> (*)(int, std::vector<int>, std::vector<int>);
 
 /**
  * @brief The time_analysis function measures the average running time of a given APlusBFunction
@@ -21,7 +21,7 @@ using APlusBFunction = std::vector<long long> (*)(int, std::vector<int>, std::ve
  * running times.
  *
  * @param function: A function pointer to the APlusBFunction function that takes an integer N and
- * two vectors A and B of size N, and returns a vector of long long integers.
+ * two vectors A and B of size N, and returns a vector of int integers.
  * @param MAX_N: The maximum input size to test. The function will test input sizes from 1 to MAX_N
  * in logarithmic steps.
  * @param num_of_iterations: The number of iterations to run for each input size. The function will
@@ -54,7 +54,7 @@ std::map<int, double> time_analysis(APlusBFunction function, int MAX_N, int num_
 
       // Compute the expected result using the naive algorithm
       auto start = std::chrono::high_resolution_clock::now();
-      std::vector<long long> expected = function(N, A, B);
+      std::vector<int> expected = function(N, A, B);
       auto end = std::chrono::high_resolution_clock::now();
       std::chrono::duration<double> diff = end - start;
       iteration_duration[iteration] = diff;
@@ -119,32 +119,38 @@ void print_complexity_table(std::map<int, double> avg_time, ComplexityFactor com
   }
 }
 
-TEST_CASE("A Plus B") {
-  int N = 3;
+TEST_CASE("A Plus B: toy example correctness") {
+  int n = 3;
   std::vector<int> A({0, 2, 2});
   std::vector<int> B({3, 5, 6});
   std::vector<int> expected({3, 5, 5});
-  std::vector<long long> res = smallest_sums(N, A, B);
+  std::vector<int> res = smallest_sums(n, A, B);
 
-  int n = res.size();
   for (int i = 0; i < n; ++i) {
     if (i > 0) printf(" ");
-    printf("%lld", res[i]);
+    printf("%d", res[i]);
   }
   printf("\n");
 
+  // Test that two vectors are equal
   for (int i = 0; i < n; ++i) {
     CHECK(expected[i] == res[i]);
   }
 
   // Test that two vectors are equal
-  std::vector<long long> res_effi = smallest_sums_efficient(N, A, B);
+  std::vector<int> res_effi = smallest_sums_efficient(N, A, B);
   for (int i = 0; i < n; ++i) {
     CHECK(expected[i] == res_effi[i]);
   }
+
+  // Test that two vectors are equal
+  std::vector<int> res_chathelp = smallest_sums_chathelp(N, A, B);
+  for (int i = 0; i < n; ++i) {
+    CHECK(expected[i] == res_chathelp[i]);
+  }
 }
 
-TEST_CASE("A Plus B: long test case") {
+TEST_CASE("A Plus B: long test case - Correctness against naive algorithm") {
   // Generate a random number N between 1 and 1000000
   int N = 1 + (rand() % 100);
 
@@ -164,22 +170,29 @@ TEST_CASE("A Plus B: long test case") {
 
   // Compute the expected result using the naive algorithm
   auto start = std::chrono::high_resolution_clock::now();
-  std::vector<long long> expected = smallest_sums(N, A, B);
+  std::vector<int> expected = smallest_sums(N, A, B);
   auto end = std::chrono::high_resolution_clock::now();
   std::chrono::duration<double> diff = end - start;
   std::cout << "smallest_sums took " << diff.count() << " seconds" << std::endl;
 
   // Compute the result using the efficient algorithm
   start = std::chrono::high_resolution_clock::now();
-  std::vector<long long> res = smallest_sums_efficient(N, A, B);
+  std::vector<int> res = smallest_sums_efficient(N, A, B);
   end = std::chrono::high_resolution_clock::now();
   diff = end - start;
   std::cout << "smallest_sums_efficient took " << diff.count() << " seconds" << std::endl;
 
+  // Compute the result using the efficient algorithm
+  start = std::chrono::high_resolution_clock::now();
+  std::vector<int> res_chathelp = smallest_sums_chathelp(N, A, B);
+  end = std::chrono::high_resolution_clock::now();
+  diff = end - start;
+  std::cout << "smallest_sums_chathelp took " << diff.count() << " seconds" << std::endl;
+
   // Check that the two results are the same
   int n = res.size();
   for (int i = 0; i < n; ++i) {
-    CHECK(expected[i] == res[i]);
+    CHECK(expected[i] == res_chathelp[i]);
   }
 }
 
@@ -199,8 +212,19 @@ TEST_CASE("A Plus B: Efficient Algorithm, Time Analysis") {
   std::cout << "A Plus B: Efficient Algorithm, Time Analysis" << std::endl;
 
   // Run the time analysis
-  std::map<int, double> avg_time = time_analysis(smallest_sums_efficient, 10000, 100, 2);
+  std::map<int, double> avg_time = time_analysis(smallest_sums_efficient, 100, 100, 2);
 
   // Print the results in a nice table format and add the theoretical time complexity
   print_complexity_table(avg_time, N2);
+}
+
+TEST_CASE("A Plus B: ChatHelp Algorithm, Time Analysis") {
+  // Print test name
+  std::cout << "A Plus B: ChatHelp Algorithm, Time Analysis" << std::endl;
+
+  // Run the time analysis
+  std::map<int, double> avg_time = time_analysis(smallest_sums_chathelp, 100000, 100, 10);
+
+  // Print the results in a nice table format and add the theoretical time complexity
+  print_complexity_table(avg_time, NlogN);
 }

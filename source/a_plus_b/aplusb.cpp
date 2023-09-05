@@ -1,6 +1,7 @@
 #include "a_plus_b/aplusb.h"
 
 #include <algorithm>
+#include <queue>
 
 /**
  * @brief smallest_sums - Given two sorted arrays A and B of size N each.
@@ -14,16 +15,16 @@
  * Returning the first N elements takes O(N) time.
  * Overall time complexity: O(N^2 log(N))
  * Space complexity: O(N^2)
- * @param N - Length of A and B
- * @param A - Sorted array of integers
- * @param B - Sorted array of integers
+ * @param N Length of A and B
+ * @param A Sorted array of integers
+ * @param B Sorted array of integers
  * @return std::vector<int>
  * @example N = 3, A = [0, 2, 2], B = [3, 5, 6]
  * The first 3 smallest sums are 0 + 3 = 3, 0 + 5 = 5, 0 + 5 = 5.
  */
-std::vector<long long> smallest_sums(int N, std::vector<int> A, std::vector<int> B) {
-  std::vector<long long> C_long(N * N);
-  std::vector<long long> C(N);
+std::vector<int> smallest_sums(int N, std::vector<int> A, std::vector<int> B) {
+  std::vector<int> C_long(N * N);
+  std::vector<int> C(N);
 
   if (1 == N) {
     C[0] = A[0] + B[0];
@@ -84,13 +85,13 @@ std::vector<long long> smallest_sums(int N, std::vector<int> A, std::vector<int>
  * Time complexity: O(N^2)
  * Space complexity: O(N)
  *
- * @param N - Length of A and B
- * @param A - Sorted array of integers
- * @param B - Sorted array of integers
+ * @param N Length of A and B
+ * @param A Sorted array of integers
+ * @param B Sorted array of integers
  * @return std::vector<int> - First N values in C
  */
-std::vector<long long> smallest_sums_efficient(int N, std::vector<int> A, std::vector<int> B) {
-  std::vector<long long> C(N);
+std::vector<int> smallest_sums_efficient(int N, std::vector<int> A, std::vector<int> B) {
+  std::vector<int> C(N);
   std::vector<int> CC_index(N, 0);
   C[0] = A[0] + B[0];
   CC_index[0]++;
@@ -107,6 +108,34 @@ std::vector<long long> smallest_sums_efficient(int N, std::vector<int> A, std::v
     k++;
     CC_index[min_idx]++;
   }
+  return C;
+}
 
+/**
+ * Computes the sum of the smallest i+1 pairs of elements from A and B, for i = 0 to N-1.
+ *
+ * @param N The length of the input vectors A and B.
+ * @param A The first input vector of length N.
+ * @param B The second input vector of length N.
+ * @return A vector C of length N, where C[i] is the sum of the smallest i+1 pairs of elements from
+ * A and B.
+ */
+std::vector<int> smallest_sums_chathelp(int N, std::vector<int> A, std::vector<int> B) {
+  std::vector<int> C(N);
+  std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>,
+                      std::greater<std::pair<int, int>>>
+      pq;
+  for (int i = 0; i < N; i++) {
+    pq.push({A[i] + B[0], 0});
+  }
+  int k = 0;
+  while (k < N) {
+    auto [sum, j] = pq.top();
+    pq.pop();
+    C[k++] = sum;
+    if (j < N - 1) {
+      pq.push({sum - B[j] + B[j + 1], j + 1});
+    }
+  }
   return C;
 }
