@@ -1,9 +1,10 @@
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Windows/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Style/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
-[![codecov](https://codecov.io/gh/TheLartians/ModernCppStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCppStarter)
+[![MacOS](https://github.com/LevyMatan/IOI-2023/actions/workflows/macos.yml/badge.svg)](https://github.com/LevyMatan/IOI-2023/actions/workflows/macos.yml)
+[![Standalone](https://github.com/LevyMatan/IOI-2023/actions/workflows/standalone.yml/badge.svg)](https://github.com/LevyMatan/IOI-2023/actions/workflows/standalone.yml)
+[![Windows](https://github.com/LevyMatan/IOI-2023/actions/workflows/windows.yml/badge.svg)](https://github.com/LevyMatan/IOI-2023/actions/workflows/windows.yml)
+[![Ubuntu](https://github.com/LevyMatan/IOI-2023/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/LevyMatan/IOI-2023/actions/workflows/ubuntu.yml)
+[![Style](https://github.com/LevyMatan/IOI-2023/actions/workflows/style.yml/badge.svg)](https://github.com/LevyMatan/IOI-2023/actions/workflows/style.yml)
+[![Install](https://github.com/LevyMatan/IOI-2023/actions/workflows/install.yml/badge.svg)](https://github.com/LevyMatan/IOI-2023/actions/workflows/install.yml)
+[![codecov](https://codecov.io/gh/LevyMatan/IOI-2023/graph/badge.svg?token=LZApP479at)](https://codecov.io/gh/LevyMatan/IOI-2023)
 
 <p align="center">
   <img src="https://repository-images.githubusercontent.com/254842585/4dfa7580-7ffb-11ea-99d0-46b8fe2f4170" height="175" width="auto" />
