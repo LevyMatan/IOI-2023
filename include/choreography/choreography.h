@@ -4,11 +4,10 @@
  * @brief Choreography
 The Hungarian National Dance Ensemble is practicing a new choreography. There are N dancers
 in the ensemble, numbered from 0 to N − 1, where N is an even number.
-At the practice sessions, the choreographer first lines up the dancers. The positions in the line are
-numbered from 0 to N − 1, and position i is occupied by dancer P[i] at the start.
-After the dancers line up, the choreographer asks them to perform a sequence of moves. Each
-move must be completed before they begin performing the next one. The dancers are practicing 4
-types of moves:
+At the practice sessions, the choreographer first lines up the dancers. The positions in the line
+are numbered from 0 to N − 1, and position i is occupied by dancer P[i] at the start. After the
+dancers line up, the choreographer asks them to perform a sequence of moves. Each move must be
+completed before they begin performing the next one. The dancers are practicing 4 types of moves:
 1. Every dancer moves K positions to the right cyclically, where 0 ≤ K < N. That is,
 for each i from 0 to N − K − 1, inclusive, the dancer currently standing at position i
 moves to position i + K, and
@@ -60,13 +59,10 @@ This procedure is called Q times.
 Example
 Consider the following sequence of calls:
 init(6, [5, 1, 4, 2, 0, 3])
-There are 6 dancers, and the initial order of the dancers is given by the array [5, 1, 4, 2, 0, 3], that is,
-position 0 is occupied by dancer 5, position 1 is occupied by dancer 1, position 2 is occupied by
-choreography (2 of 4)
-dancer 4, and so on.
-move_left(2)
-Each dancer moves two places to the left cyclically. After the move, the order of the dancers
-becomes [4, 2, 0, 3, 5, 1].
+There are 6 dancers, and the initial order of the dancers is given by the array [5, 1, 4, 2, 0, 3],
+that is, position 0 is occupied by dancer 5, position 1 is occupied by dancer 1, position 2 is
+occupied by choreography (2 of 4) dancer 4, and so on. move_left(2) Each dancer moves two places to
+the left cyclically. After the move, the order of the dancers becomes [4, 2, 0, 3, 5, 1].
 get_position(0)
 This call asks the position of dancer 0 after performing the first move. Dancer 0 is standing at
 position 2. Therefore, the procedure should return 2.
@@ -93,9 +89,9 @@ P[i] ≠ P[j] (for each i and j such that 0 ≤ i < j < N)
 0 ≤ D < N
  * @version 0.1
  * @date 2023-09-25
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include <vector>
 
