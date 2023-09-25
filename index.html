@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Illustration of smallest_sums function</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+    .box {
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      width: 200px;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 20px;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Illustration of smallest_sums function</h1>
+  </header>
+  <div class="container">
+    <div class="box">
+      <h2>Input</h2>
+      <p>N = 3, A = [1, 2, 3], B = [4, 5, 6]</p>
+    </div>
+    <div class="box">
+      <h2>Output</h2>
+      <table>
+        <tr>
+          <th>i</th>
+          <th>A[i]</th>
+          <th>B[j]</th>
+          <th>A[i] + B[j]</th>
+          <th>C[i]</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>1</td>
+          <td>4</td>
+          <td>5</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>4</td>
+          <td>6</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>7</td>
+          <td>7</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="container">
+    <div class="box">
+      <h2>Naive Algorithm</h2>
+      <p>The naive algorithm works by iterating over each element of A and finding the smallest sum of an element of A and an element of B that has the current element of A as the first element. This is done by iterating over each element of B and computing the sum of the current element of A and the current element of B. If the sum is smaller than the current minimum sum, it is updated as the new minimum sum. Once all elements of B have been checked, the minimum sum is added to the output vector C.</p>
+    </div>
+    <div class="box">
+      <h2>Code</h2>
+      <pre><code>std::vector&lt;int&gt; smallest_sums(int N, std::vector&lt;int&gt; A, std::vector&lt;int&gt; B) {
+  std::vector&lt;int&gt; C(N);
+
+  for (int i = 0; i &lt; N; i++) {
+    int min_sum = A[i] + B[0];
+    for (int j = 1; j &lt; N; j++) {
+      int sum = A[i] + B[j];
+      if (sum &lt; min_sum) {
+        min_sum = sum;
+      }
+    }
+    C[i] = min_sum;
+  }
+
+  return C;
+}</code></pre>
+    </div>
+  </div>
+</body>
+</html>
