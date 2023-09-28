@@ -45,7 +45,7 @@ namespace choreography_steps_1_2_optimized {
 
     void toggle() { this->value = (this->value + 1) % this->base; }
 
-    void set_value(int value) { this->value = value % this->base; }
+    void set_value(int val) { this->value = val % this->base; }
     int get_value() { return this->value; }
   };
 
