@@ -195,6 +195,8 @@ TEST_CASE("A Plus B: long test case - Correctness against naive algorithm") {
   }
 }
 
+#ifdef TIME_ANALYSIS_TESTS
+
 TEST_CASE("A Plus B: Naive Algorithm, Time Analysis") {
   // Print test name
   std::cout << "A Plus B: Naive Algorithm, Time Analysis" << std::endl;
@@ -227,3 +229,5 @@ TEST_CASE("A Plus B: ChatHelp Algorithm, Time Analysis") {
   // Print the results in a nice table format and add the theoretical time complexity
   print_complexity_table(avg_time, NlogN);
 }
+
+#endif  // TIME_ANALYSIS_TESTS
