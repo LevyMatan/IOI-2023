@@ -53,15 +53,14 @@
  * Example
  * Consider the following sequence of calls:
  * init(6, [5, 1, 4, 2, 0, 3])
- * There are 6 dancers, and the initial order of the dancers is given by the array [5, 1, 4, 2, 0, 3],
- * that is, position 0 is occupied by dancer 5, position 1 is occupied by dancer 1, position 2 is
- * occupied by choreography (2 of 4) dancer 4, and so on. move_left(2) Each dancer moves two places to
- * the left cyclically. After the move, the order of the dancers becomes [4, 2, 0, 3, 5, 1].
- * get_position(0)
- * This call asks the position of dancer 0 after performing the first move. Dancer 0 is standing at
- * position 2. Therefore, the procedure should return 2.
- * swap_places()
- * After this move, the order of the dancers becomes [2, 4, 3, 0, 1, 5].
+ * There are 6 dancers, and the initial order of the dancers is given by the array
+ * [5, 1, 4, 2, 0, 3], that is, position 0 is occupied by dancer 5, position 1 is occupied by dancer
+ * 1, position 2 is occupied by choreography (2 of 4) dancer 4, and so on. move_left(2) Each dancer
+ * moves two places to the left cyclically.
+ * After the move, the order of the dancers becomes [4, 2, 0, 3, 5, 1]. get_position(0) This call
+ * asks the position of dancer 0 after performing the first move. Dancer 0 is standing at
+ * position 2. Therefore, the procedure should return 2. swap_places() After this move, the order of
+ * the dancers becomes [2, 4, 3, 0, 1, 5].
  * move_around()
  * The new position of each dancer is determined as follows.
  * Dancer 0: position 0 is occupied by dancer 2, so dancer 0 moves to position 2.
@@ -71,16 +70,10 @@
  * Dancer 4: position 4 is occupied by dancer 1, so dancer 4 stays at position 1.
  * Dancer 5: position 5 is occupied by dancer 5, so dancer 5 stays at position 5.
  * After this move, the order of the dancers becomes [3, 4, 0, 2, 1, 5].
- * get_position(3)
- * Dancer 3 is at position 0 after performing every move so far. The procedure should return 0.
- * Constraints
- * 1 ≤ N ≤ 100 000
- * 0 ≤ P[i] < N (for each i such that 0 ≤ i < N)
- * P[i] ≠ P[j] (for each i and j such that 0 ≤ i < j < N)
- * 0 ≤ M ≤ 100 000
- * 1 ≤ Q ≤ 200 000
- * 0 ≤ K < N
- * 0 ≤ D < N
+ * get_position(3) Dancer 3 is at position 0 after performing every move so far. The procedure
+ * should return 0. Constraints 1 ≤ N ≤ 100 000 0 ≤ P[i] < N (for each i such that 0 ≤ i < N) P[i] ≠
+ * P[j] (for each i and j such that 0 ≤ i < j < N) 0 ≤ M ≤ 100 000 1 ≤ Q ≤ 200 000 0 ≤ K < N 0 ≤ D <
+ * N
  * @version 0.1
  * @date 2023-09-25
  *
@@ -91,32 +84,32 @@
 
 namespace choreography_naive {
 
-    void init(int N, std::vector<int> P);
+  void init(int N, std::vector<int> P);
 
-    void move_right(int K);
+  void move_right(int K);
 
-    void move_left(int K);
+  void move_left(int K);
 
-    void swap_places();
+  void swap_places();
 
-    void move_around();
+  void move_around();
 
-    int get_position(int D);
+  int get_position(int D);
 
-}
+}  // namespace choreography_naive
 
 namespace choreography_steps_1_2_optimized {
 
-    void init(int N, std::vector<int> P);
+  void init(int N, std::vector<int> P);
 
-    void move_right(int K);
+  void move_right(int K);
 
-    void move_left(int K);
+  void move_left(int K);
 
-    void swap_places();
+  void swap_places();
 
-    void move_around();
+  void move_around();
 
-    int get_position(int D);
+  int get_position(int D);
 
-}
+}  // namespace choreography_steps_1_2_optimized

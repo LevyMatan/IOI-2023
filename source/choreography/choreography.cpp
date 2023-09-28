@@ -2,60 +2,51 @@
 
 #include <vector>
 namespace choreography_steps_1_2_optimized {
-using namespace std;
+  using namespace std;
 
+  class array_index {
+  public:
+    int value;
+    int base;
 
-  class array_index{
-    public:
-      int value;
-      int base;
+    array_index(int value, int base) {
+      this->base = base;
+      this->value = value % this->base;
+    }
 
-      array_index(int value, int base){
-        this->base = base;
-        this->value = value % this->base;
-      }
+    array_index(int value) {
+      this->base = 2;
+      this->value = value % this->base;
+    }
 
-      array_index(int value){
-        this->base = 2;
-        this->value = value % this->base;
-      }
+    array_index() {
+      this->base = 2;
+      this->value = 0;
+    }
 
-      array_index(){
-        this->base = 2;
-        this->value = 0;
-      }
+    // return int value
+    operator int() const { return value; }
 
-      // return int value
-      operator int() const { return value; }
+    // define the `+` operator
+    array_index operator+(const array_index& rhs) const {
+      array_index result = *this;  // Make a copy of myself.
+      result.value += rhs.value;   // Add the value of the other array_index.
+      result.value %= this->base;  // Make sure we stay within bounds.
+      return result;               // Return the result.
+    }
 
-      // define the `+` operator
-      array_index operator+(const array_index& rhs) const {
-        array_index result = *this;     // Make a copy of myself.
-        result.value += rhs.value;      // Add the value of the other array_index.
-        result.value %= this->base;     // Make sure we stay within bounds.
-        return result;                  // Return the result.
-      }
+    // define the `-` operator
+    array_index operator-(const array_index& rhs) const {
+      array_index result = *this;  // Make a copy of myself.
+      result.value = rhs.value;    // Add the value of the other array_index.
+      result.value = (result.value + this->base) % this->base;  // Make sure we stay within bounds.
+      return result;                                            // Return the result.
+    }
 
-      // define the `-` operator
-      array_index operator-(const array_index& rhs) const {
-        array_index result = *this;     // Make a copy of myself.
-        result.value = rhs.value;      // Add the value of the other array_index.
-        result.value = (result.value + this->base) % this->base;     // Make sure we stay within bounds.
-        return result;                  // Return the result.
-      }
+    void toggle() { this->value = (this->value + 1) % this->base; }
 
-      void toggle(){
-        this->value = (this->value + 1) % this->base;
-      }
-
-      void set_value(int value){
-        this->value = value % this->base;
-      }
-      int get_value(){
-        return this->value;
-      }
-
-
+    void set_value(int value) { this->value = value % this->base; }
+    int get_value() { return this->value; }
   };
 
   /**
@@ -69,10 +60,10 @@ using namespace std;
    * I.E. g_array[dancer_array][3] = 7 means that dancer 3 is in position 7.
    * The rows can switch rules between each other.
    * Two indexes are used to keep track of the current row and the other row.
-   * dancer_array is an integer of values 0 or 1, the index is pointing to the row of the dancer notation.
-   * position_array is an integer of values 0 or 1, the index is pointing to the row of the position notation.
-   * They will never hold the same value at the same time.
-   * 
+   * dancer_array is an integer of values 0 or 1, the index is pointing to the row of the dancer
+   * notation. position_array is an integer of values 0 or 1, the index is pointing to the row of
+   * the position notation. They will never hold the same value at the same time.
+   *
    */
   vector<vector<int>> g_array;
 
@@ -119,7 +110,7 @@ using namespace std;
    *
    */
   void swap_places() {
-    if(OFFSET){
+    if (OFFSET) {
       vector<int> temp = g_array[position_array];
       for (int i = 0; i < NUM_OF_POSITIONS; i++) {
         g_array[dancer_array][i] = (g_array[dancer_array][i] + OFFSET) % NUM_OF_POSITIONS;
@@ -127,8 +118,7 @@ using namespace std;
       }
       OFFSET = 0;
     }
-    for (int i = 0; i < NUM_OF_POSITIONS / 2; i++)
-    {
+    for (int i = 0; i < NUM_OF_POSITIONS / 2; i++) {
       int dancer_2i = g_array[position_array][2 * i];
       int dancer_2i_1 = g_array[position_array][2 * i + 1];
       g_array[position_array][2 * i] = dancer_2i_1;
@@ -137,7 +127,7 @@ using namespace std;
       g_array[dancer_array][dancer_2i] = 2 * i + 1;
       g_array[dancer_array][dancer_2i_1] = 2 * i;
     }
-    
+
     return;
   }
 
@@ -146,7 +136,7 @@ using namespace std;
    *
    */
   void move_around() {
-    if(OFFSET){
+    if (OFFSET) {
       vector<int> temp = g_array[position_array];
       for (int i = 0; i < NUM_OF_POSITIONS; i++) {
         g_array[dancer_array][i] = (g_array[dancer_array][i] + OFFSET) % NUM_OF_POSITIONS;
@@ -166,12 +156,9 @@ using namespace std;
    * @param D an integer representing a dancer.
    * @return int
    */
-  int get_position(int D) { 
+  int get_position(int D) { return (g_array[dancer_array][D] + OFFSET) % NUM_OF_POSITIONS; }
 
-    return (g_array[dancer_array][D] + OFFSET) % NUM_OF_POSITIONS; 
-  }
-
-}
+}  // namespace choreography_steps_1_2_optimized
 
 namespace choreography_naive {
 
