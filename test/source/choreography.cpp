@@ -28,6 +28,12 @@ TEST_CASE("Test 1 - choreography_steps_1_2_optimized") {
 | swap_places    |     |     |     |     |     |     |
 | position_array | 2   | 4   | 1   | 5   | 0   | 3   |
 | dancer array   | 4   | 2   | 0   | 5   | 1   | 3   |
+| right          | 1   |     |     |     |     |     |
+| position_array | 3   | 2   | 4   | 1   | 5   | 0   |
+| dancer array   | 5   | 3   | 1   | 0   | 2   | 4   |
+| swap_places    |     |     |     |     |     |     |
+| position_array | 2   | 3   | 1   | 4   | 0   | 5   |
+| dancer array   | 4   | 2   | 0   | 1   | 3   | 5   |
   */
   init(6, {5, 1, 4, 2, 0, 3});
   // position array = [5, 1, 4, 2, 0, 3]
@@ -60,6 +66,20 @@ TEST_CASE("Test 1 - choreography_steps_1_2_optimized") {
   CHECK(get_position(3) == 5);
   CHECK(get_position(4) == 1);
   CHECK(get_position(5) == 3);
+  move_right(1);
+  CHECK(get_position(0) == 5);
+  CHECK(get_position(1) == 3);
+  CHECK(get_position(2) == 1);
+  CHECK(get_position(3) == 0);
+  CHECK(get_position(4) == 2);
+  CHECK(get_position(5) == 4);
+  swap_places();
+  CHECK(get_position(0) == 4);
+  CHECK(get_position(1) == 2);
+  CHECK(get_position(2) == 0);
+  CHECK(get_position(3) == 1);
+  CHECK(get_position(4) == 3);
+  CHECK(get_position(5) == 5);
 }
 TEST_CASE("Test 1 - naive") {
   using namespace choreography_naive;
